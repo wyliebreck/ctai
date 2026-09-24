@@ -10,7 +10,7 @@ async function process(x, y, z) {
   return output;
 }
 async function callGemini() {
-  const apiKey = "AQ.Ab8RN6I8wyO4DxrWWxEjLWk1sa0FvZiv4M8S5BfFawWq7wqZvw";
+  const apiKey = "";
   const url = "https://googleapis.com";
   const requestBody = {
     contents: [
