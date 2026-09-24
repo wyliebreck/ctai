@@ -1,0 +1,24 @@
+body {
+  font-family: monospace;
+  font-size: 14px;
+  max-width: 45em;
+  margin: 0 auto;
+  padding: 1em 2em;
+}
+h1 {
+  text-align: center;
+}
+input[type="text"] {
+  width: 100%;
+}
+table {
+  margin: 1em auto;
+}
+td {
+  vertical-align: top;
+}
+#output {
+  border: thin lightgray solid;
+  min-height: 1em;
+  padding: 0.5em
+}
