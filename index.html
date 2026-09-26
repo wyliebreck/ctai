@@ -1,40 +1,25 @@
 <!doctype html>
 <html>
   <head>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>My application</title>
+		<title>Question maker</title>
     <link rel="stylesheet" href="style.css">
     <script src="code.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
   </head>
   <body>
-    <h1>My application</h1>
-    <table>
-      <tr>
-        <td>Input1:</td>
-        <td><input id="input1" type="text"></td>
-      </tr>
-      <tr>
-        <td>Input2:</td>
-        <td>
-          <select id="input2">
-            <option></option>
-            <option>A</option>
-            <option>B</option>
-          </select>
-        </td>
-      <tr>
-        <td>Input3:</td>
-        <td><input id="input3" type="file"></td>
-      </tr>
-      </tr>
-      <tr>
-        <td></td>
-        <td><button onclick="perform()">Perform the process</button></td>
-      </tr>
-      <tr>
-        <td>Output:</td>
-        <td><div id="output"></div></td>
-      </tr>
-    </table>
+    <h1>Question maker</h1>
+    <p>
+      This tool will help you to make multiple-choice questions about the content of a given PDF document.
+    </p>
+    <p>
+      Choose the PDF you would like to use:
+    </p>
+    <input id="file" type="file">
+    <p>
+      Enter your API key:
+    </p>
+    <input id="key" type="text">
+    <button onclick="perform()">Suggest some questions</button>
+    <div id="output"></div>
   </body>
 </html>

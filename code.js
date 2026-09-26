@@ -1,45 +1,62 @@
 async function perform() {
-  let input1 = document.getElementById("input1").value;
-  let input2 = document.getElementById("input2").value;
-  let input3 = document.getElementById("input3").files[0];
-  let output = await process(input1, input2, input3);
-  document.getElementById("output").innerText = output;
+  // Get the inputs
+  let input = document.getElementById("file").files[0];
+  // Run the process
+  document.getElementById("output").textContent = "Processing...";
+  let output = await process(input);
+  // Handle the output
+  let converter = new showdown.Converter();
+  let html = converter.makeHtml(output);
+  document.getElementById("output").innerHTML = html;
 }
-async function process(x, y, z) {
-  let output = await callGemini();
-  return output;
-}
-async function callGemini() {
-  const apiKey = "";
-  const url = "https://googleapis.com";
-  const requestBody = {
-    contents: [
-      {
-        parts: [
-          {text: "Explain quantum computing in one sentence."}
-        ]
-      }
-    ]
+async function process(file) {
+  let url = `https://generativelanguage.googleapis.com/v1beta/interactions`;
+  let model = "gemini-3.1-flash-lite";
+  let key = document.getElementById("key").value;
+  //let model = "gemini-3.8-flash-lite-tts";
+  //let model = "gemini-3.7-flash";
+  let body = {
+    model: model,
+    input: [{
+      type: "text",
+      text: "Provide two multiple choice questions about the content of the attached file. Each question should have three answer options. Each answer option should be on a new line. Include the answer, and a brief explanation.",
+    },{
+      type: "document",
+      mime_type: "application/pdf",
+      data: await fileToBase64(file),
+    }],
+    //system_instruction: "",
+    generation_config: {
+      temperature: 1.5,
+      thinking_level: "minimal",
+      //thinking_summaries: "auto",
+    },
+    /*
+    tools: [{
+      type: "google_search"
+    }]
+    */
   };
   try {
-    const response = await fetch(url, {
+    let response = await fetch(url, {
       method: "POST",
       headers: {
-        "mode": "no-cors",
         "Content-Type": "application/json",
-        "x-goog-api-key": apiKey,
+        "x-goog-api-key": key,
       },
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify(body)
     });
-    const data = await response.json();
-    const outputText = data.candidates[0].content.parts[0].text;
-    return outputText;
+    let data = await response.json();
+    return data.steps[1].content[0].text;
   }
   catch (error) {
     return error;
   }
 }
-/*
-  gemini-2.5-flash
-  
-*/
+async function fileToBase64(file) {
+  return new Promise((resolve) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result.split(",")[1]);
+  })
+};

@@ -4,21 +4,22 @@ body {
   max-width: 45em;
   margin: 0 auto;
   padding: 1em 2em;
+  text-align: justify;
+}
+button {
+  display: block;
+  margin: 1em 0;
 }
 h1 {
   text-align: center;
 }
-input[type="text"] {
+input {
+  border: thin lightgray solid;
+  box-sizing: border-box;
+  display: block;
+  padding: 0.5em;
   width: 100%;
 }
-table {
-  margin: 1em auto;
-}
-td {
-  vertical-align: top;
-}
 #output {
-  border: thin lightgray solid;
-  min-height: 1em;
-  padding: 0.5em
+  padding: 0;
 }
