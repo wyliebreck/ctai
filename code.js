@@ -13,7 +13,12 @@ async function run() {
       model: "gemini-3.1-flash-lite",
       input: [{
         type: "text",
-        text: "Provide two multiple choice questions about the content of the attached file. Each question should have three answer options. Each answer option should be on a new line. Include the answer, and a brief explanation.",
+        text: "
+          Provide two multiple choice questions about the content of the attached file.
+          Each question should have three answer options.
+          Each answer option should be on a new line.
+          Include the answer, and a brief explanation.
+        ",
       },{
         type: "document",
         mime_type: "application/pdf",
