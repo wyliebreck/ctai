@@ -1,6 +1,8 @@
 async function run() {
   let file = document.getElementById("file").files[0];
+  let fileURL = await fileToDataURL(file);
   let key = window.prompt("What is your API key?");
+  document.getElementById("preview").src = fileURL.url;
   document.getElementById("output").textContent = "Processing...";
   let url = `https://generativelanguage.googleapis.com/v1beta/interactions`;
   let response = await fetch(url, {
@@ -14,15 +16,16 @@ async function run() {
       input: [{
         type: "text",
         text: `
-          Provide two multiple choice questions about the content of the attached file.
-          Each question should have three answer options.
-          Each answer option should be on a new line.
-          Include the answer, and a brief explanation.
+          How could I improve the attached data visualisation?
+          Give me the three most important improvements.
+          Use one paragraph for each improvement, with two sentences per paragraph.
+          In the first sentence, give the improvement in bold.
+          In the second sentence, give the reason.
         `,
       },{
         type: "document",
-        mime_type: "application/pdf",
-        data: await fileToBase64String(file),
+        mime_type: fileURL.mimeType,
+        data: fileURL.data,
       }],
     })
   });
@@ -31,10 +34,15 @@ async function run() {
   let converter = new showdown.Converter();
   document.getElementById("output").innerHTML = converter.makeHtml(text);
 }
-function fileToBase64String(file) {
+function fileToDataURL(file) {
   return new Promise((resolve) => {
     let reader = new FileReader();
+    reader.onload = () => {
+      let url = reader.result;
+      let mimeType = url.split(";")[0].split(":")[1].trim();
+      let data = url.split(",")[1];
+      resolve({url, mimeType, data});
+    };
     reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result.split(",")[1]);
   })
 };

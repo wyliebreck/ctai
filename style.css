@@ -1,15 +1,14 @@
 body {
   font-family: monospace;
   font-size: 14px;
+  max-width: 40em;
   margin: 0 auto;
-  max-width: 45em;
   padding: 1em 2em;
   text-align: justify;
 }
 button {
   display: block;
-  margin: 1em auto;
-  padding: 0.5em;
+  margin: 1em 0;
 }
 h1 {
   text-align: center;
@@ -23,4 +22,10 @@ input {
 }
 #output {
   padding: 0;
+}
+#preview {
+  display: block;
+  max-height: 20em;
+  margin: 0 auto;
+  width: auto;
 }

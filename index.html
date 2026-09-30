@@ -1,21 +1,19 @@
 <!doctype html>
 <html>
   <head>
-		<title>Question maker</title>
+		<title>Visualisation improver</title>
     <link rel="stylesheet" href="style.css">
     <script src="code.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
   </head>
   <body>
-    <h1>Question maker</h1>
+    <h1>Visualisation improver</h1>
     <p>
-      This tool will help you to make multiple-choice questions about the content of a given PDF document.
-    </p>
-    <p>
-      Choose the PDF you would like to use:
+      Choose a visualisation that you'd like to improve:
     </p>
     <input id="file" type="file">
-    <button onclick="run()">Suggest some questions</button>
+    <button onclick="run()">Suggest some improvements</button>
+    <img id="preview">
     <div id="output"></div>
   </body>
 </html>
